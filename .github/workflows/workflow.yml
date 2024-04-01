@@ -16,7 +16,10 @@ jobs:
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v3
         env:
-            JF_ENV_1: ${{ secrets.JF_SECRET_ENV_1 }}
+          # JFrog platform url (for example: https://acme.jfrog.io)
+          JF_URL: ${{ secrets.JF_URL }}
+          # JFrog Platform access token
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
       # - name: NPM Audit 
       #   env:
       #     JFROG_CLI_BUILD_NAME: 'roybs-nodejs-project'
@@ -31,11 +34,10 @@ jobs:
       - name: Docker build 
         env:
           JFROG_CLI_BUILD_NAME: 'roybs-nodejs-project'
-          JF_ENV_1: ${{ secrets.JF_SECRET_ENV_1 }}
-          JF_HOST: ${{ secrets.JF_HOST }}
+          JF_HOST: ${{ secrets.JF_URL }}
           JFROG_CLI_BUILD_PROJECT: roybs
         run: |
-          docker build --build-arg JF_TOKEN=${JF_ENV_1} . -t roybs-nodejs-project:$GITHUB_RUN_NUMBER
+          docker build . -t roybs-nodejs-project:$GITHUB_RUN_NUMBER
           docker tag roybs-nodejs-project:$GITHUB_RUN_NUMBER $JF_HOST/roybs-docker-dev-local/roybs-nodejs-project:$GITHUB_RUN_NUMBER
           jf docker push $JF_HOST/roybs-docker-dev-local/roybs-nodejs-project:$GITHUB_RUN_NUMBER --build-name=$JFROG_CLI_BUILD_NAME --build-number=$GITHUB_RUN_NUMBER 
           jf rt bp $JFROG_CLI_BUILD_NAME $GITHUB_RUN_NUMBER
