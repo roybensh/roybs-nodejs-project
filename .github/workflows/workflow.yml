@@ -38,6 +38,8 @@ jobs:
           JFROG_CLI_BUILD_PROJECT: roybs
         run: |
           docker build . -t roybs-nodejs-project:$GITHUB_RUN_NUMBER
+          docker images
           docker tag roybs-nodejs-project:$GITHUB_RUN_NUMBER $JF_HOST/roybs-docker-dev-local/roybs-nodejs-project:$GITHUB_RUN_NUMBER
+          docker images
           jf docker push $JF_HOST/roybs-docker-dev-local/roybs-nodejs-project:$GITHUB_RUN_NUMBER --build-name=$JFROG_CLI_BUILD_NAME --build-number=$GITHUB_RUN_NUMBER 
           jf rt bp $JFROG_CLI_BUILD_NAME $GITHUB_RUN_NUMBER
