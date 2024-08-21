@@ -21,7 +21,7 @@ jobs:
           JF_URL: ${{ secrets.JF_URL }}
           # [Mandatory]
           # The GitHub token is automatically generated for the job
-          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}\
+          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JF_GIT_AGGREGATE_FIXES: "TRUE"
           JF_INCLUDE_ALL_VULNERABILITIES: "TRUE"          
           JF_FAIL: "FALSE" 
@@ -30,3 +30,4 @@ jobs:
         # Insert to oidc-provider-name the 'Provider Name' defined in the OIDC integration configured in the JPD
         with:
           oidc-provider-name: "roybs-gh"
+
