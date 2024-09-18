@@ -40,7 +40,7 @@ jobs:
       
       - name: build publish 
         run: | 
-          jf jf bp ${{ vars.BUILD_NAME }} $GITHUB_RUN_NUMBER
+          jf bp ${{ vars.BUILD_NAME }} $GITHUB_RUN_NUMBER
         
       - name: Security Audit
         run: | 
