@@ -21,8 +21,6 @@ jobs:
         env:
           # JFrog platform url (for example: https://acme.jfrog.io)
           JF_URL: ${{ vars.JF_URL }}
-          # JFrog Platform access token
-          JF_ACCESS_TOKEN: ${{ vars.JF_ACCESS_TOKEN }}
         with:
           oidc-provider-name: "roybs-gh"
    
