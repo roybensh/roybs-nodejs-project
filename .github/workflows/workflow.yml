@@ -24,7 +24,7 @@ jobs:
         with:
           oidc-provider-name: "roybs-gh"
    
-      - name: Docker build 
+      - name: Docker build and push 
         env:
           JF_HOST: ${{ vars.JF_URL }}
           JFROG_CLI_BUILD_PROJECT: roybs
@@ -36,8 +36,12 @@ jobs:
           docker tag ${{ vars.IMAGE_NAME }}:${{ github.run_number }} ${{ vars.DOCKER_REG_SRV }}/${{ vars.DOCKER_REPO }}/${{ vars.IMAGE_NAME }}:${{ github.run_number }}
           docker images
           jf docker push ${{ vars.DOCKER_REG_SRV }}/${{ vars.DOCKER_REPO }}/${{ vars.IMAGE_NAME }}:${{ github.run_number }} --build-name=${{ vars.BUILD_NAME }} --build-number=${{ github.run_number }}
-          jf rt bp ${{ vars.BUILD_NAME }} $GITHUB_RUN_NUMBER
 
+      
+      - name: build publish 
+        run: | 
+          jf jf bp ${{ vars.BUILD_NAME }} $GITHUB_RUN_NUMBER
+        
       - name: Security Audit
         run: | 
           jf audit
