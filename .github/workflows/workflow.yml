@@ -40,7 +40,7 @@ jobs:
           docker images
           jf config show 
           jf rt ping 
-          docker tag ${{ vars.IMAGE_NAME }}:${{ github.run_number }} ${{ vars.DOCKER_REG_SRV }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
+          docker tag ${{ vars.IMAGE_NAME }}:${{ github.run_number }} ${{ vars.DOCKER_REG_SRV }}/${{ vars.DOCKER_REPO }}/${{ vars.IMAGE_NAME }}:${{ github.run_number }}
           docker images
           jf docker push ${{ vars.DOCKER_REG_SRV }}/${{ vars.DOCKER_REPO }}/${{ vars.IMAGE_NAME }}:${{ github.run_number }} --build-name=${{ vars.BUILD_NAME }} --build-number=${{ github.run_number }}
           jf rt bp ${{ vars.BUILD_NAME }} $GITHUB_RUN_NUMBER
