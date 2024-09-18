@@ -44,6 +44,6 @@ jobs:
         
       - name: Scan Build
         run: | 
-          jf bs --fail=false --vuln --format table --rescan
+          jf bs ${{ vars.BUILD_NAME }} $GITHUB_RUN_NUMBER --fail=false --vuln --format table --rescan
 
           
