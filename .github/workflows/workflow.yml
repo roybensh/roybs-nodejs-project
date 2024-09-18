@@ -37,11 +37,15 @@ jobs:
           docker images
           jf docker push ${{ vars.DOCKER_REG_SRV }}/${{ vars.DOCKER_REPO }}/${{ vars.IMAGE_NAME }}:${{ github.run_number }} --build-name=${{ vars.BUILD_NAME }} --build-number=${{ github.run_number }}
 
-      
-      - name: build publish 
-        run: | 
+      - name: Collect and Publish Build Info
+        run: |
+          # Collect environment variables for the build
+          jf rt bce
+          # Collect VCS details from git and add them to the build
+          jf rt bag
+          # Publish build info
           jf rt bp ${{ vars.BUILD_NAME }} $GITHUB_RUN_NUMBER
-        
+
       - name: Security Audit
         run: | 
           jf audit
