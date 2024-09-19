@@ -14,11 +14,11 @@ jobs:
     # "frogbot" GitHub environment can approve the pull request to be scanned.
     environment: frogbot
     steps:
-      - uses: jfrog/frogbot@v2
+      - uses: jfrog/frogbot@v4
         env:
           # [Mandatory]
           # JFrog platform URL
-          JF_URL: ${{ secrets.JF_URL }}
+          JF_URL: ${{ vars.JF_URL }}  
           # [Mandatory]
           # The GitHub token is automatically generated for the job
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
