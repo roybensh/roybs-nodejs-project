@@ -23,7 +23,14 @@ jobs:
           JF_URL: ${{ vars.JF_URL }}  
         with:
           oidc-provider-name: "roybs-gh"
-   
+
+      - name: NPM Config
+        run: jf npmc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-deploy ${{ vars.NPM_REPO }} --repo-resolve ${{ vars.NPM_REMOTE_REPO }} --global
+        
+      - name: Curation audit 
+        run: |
+          jf curation-audit
+          
       - name: Docker build and push 
         env:
           JF_HOST: ${{ vars.JF_URL }}
